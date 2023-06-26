@@ -1,6 +1,6 @@
-namespace FirstNet.Models
+namespace FirstNet.Dtos.Character
 {
-    public class Character
+    public class GetCharacterDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = "Traveler";
