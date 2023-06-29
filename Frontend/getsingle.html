@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Character Details</title>
+  </head>
+  <body>
+    <h1 id="name"></h1>
+    <table>
+      <tr>
+        <td>ID</td>
+        <td id="id-display"></td>
+      </tr>
+      <tr>
+        <td>Class</td>
+        <td id="class"></td>
+      </tr>
+      <tr>
+        <td>HitPoints</td>
+        <td id="hitpoints"></td>
+      </tr>
+      <tr>
+        <td>Strength</td>
+        <td id="strength"></td>
+      </tr>
+      <tr>
+        <td>Defense</td>
+        <td id="defense"></td>
+      </tr>
+      <tr>
+        <td>Intelligence</td>
+        <td id="intelligence"></td>
+      </tr>
+    </table>
+
+    <script>
+      // Get the query parameter from the URL
+      var urlParams = new URLSearchParams(window.location.search);
+      var id = urlParams.get("id");
+
+      // Display the ID on the page
+      var idDisplay = document.getElementById("id-display");
+      idDisplay.textContent = id;
+
+      console.log("Starting fetch...");
+      function fetchCharacterList() {
+        fetch("http://localhost:5266/api/Character/GetSingle" + id)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              console.log(data.data);
+            } else {
+              console.error(data.message);
+            }
+            const nameH1 = document.getElementById("name");
+            nameH1.textContent = data.data.name;
+            const classTd = document.getElementById("class");
+            classTd.textContent = data.data.class;
+            const hitpointsTd = document.getElementById("hitpoints");
+            hitpointsTd.textContent = data.data.hitPoints;
+            const strengthTd = document.getElementById("strength");
+            strengthTd.textContent = data.data.strenght;
+            const defenseTd = document.getElementById("defense");
+            defenseTd.textContent = data.data.defense;
+            const intelligenceTd = document.getElementById("intelligence");
+            intelligenceTd.textContent = data.data.intelligence;
+          })
+          .catch((error) => console.error(error));
+      }
+
+      fetchCharacterList();
+      console.log("Fetch complete.");
+    </script>
+  </body>
+</html>
