@@ -16,7 +16,8 @@ namespace FirstNet.Models
             else
             {
                 newName = newName.Trim();
-                newName = newName.Replace(" ", "");
+                newName = System.Text.RegularExpressions.Regex.Replace(newName, @"\s+", " ");
+                newName = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(newName.ToLower());
                 return newName;
             }
         }

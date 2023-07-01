@@ -2,6 +2,11 @@
 <html>
   <head>
     <title>Character Details</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Arapey|Freckle-Face"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <h1 id="name"></h1>
@@ -10,33 +15,38 @@
       action="http://localhost:5266/api/Character/UpdateCharacter"
     >
       <input id="id-input" type="hidden" name="id" />
-      <input id="name-input" type="hidden" name="name" />
       <input id="class-input" type="hidden" name="class" />
       <table>
         <tr>
-          <td>ID</td>
-          <td id="id-display"></td>
+          <td class="td-left">ID</td>
+          <td id="id-display" class="unchangable-display"></td>
         </tr>
         <tr>
-          <td>Class</td>
-          <td id="class"></td>
+          <td class="td-left">Class</td>
+          <td id="class" class="unchangable-display"></td>
         </tr>
         <tr>
-          <td>HitPoints</td>
+          <td class="td-left">Name</td>
+          <td>
+            <input id="name-input" name="name" type="TEXT" />
+          </td>
+        </tr>
+        <tr>
+          <td class="td-left">HitPoints</td>
           <td>
             <input id="hitpoints" name="hitPoints" type="NUMBER" min="0" />
           </td>
         </tr>
         <tr>
-          <td>Strength</td>
+          <td class="td-left">Strength</td>
           <td><input id="strength" name="strenght" type="NUMBER" min="0" /></td>
         </tr>
         <tr>
-          <td>Defense</td>
+          <td class="td-left">Defense</td>
           <td><input id="defense" name="defense" type="NUMBER" min="0" /></td>
         </tr>
         <tr>
-          <td>Intelligence</td>
+          <td class="td-left">Intelligence</td>
           <td>
             <input
               id="intelligence"
@@ -98,6 +108,7 @@
             deleteButton.onclick = function () {
               deleteCharacter(id);
             };
+            deleteButton.className = "button-delete";
             const buttonList = document.getElementById("button-list");
             buttonList.appendChild(deleteButton);
           })

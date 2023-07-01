@@ -1,0 +1,140 @@
+body {
+  font-family: "Arapey";
+  font-size: medium;
+  background-color: #57a0c9;
+  margin-top: 1%;
+  margin-bottom: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: #604d53;
+  padding: 10px 10px 10px 10px;
+}
+
+.main-button-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 15px;
+  margin-top: 25px;
+  margin-left: 0px;
+}
+
+.main-button-character {
+  font-family: "Freckle-Face";
+  margin-top: 5px;
+  width: 25%;
+  color: #d5c5c8;
+  background-color: #604d53;
+  /* position: relative; */
+}
+
+.main-button-character:hover {
+  background-color: #d5c5c8;
+  color: #604d53;
+}
+
+.main-button-character:active {
+  background-color: #a3989a;
+  color: #604d53;
+}
+
+.main-button-character-top {
+  font-size: 125%;
+  /* position: absolute;
+  top: 0px;
+  transform: translateX(-50%); */
+  /* white-space: nowrap; */
+}
+
+.main-button-character-bottom {
+  font-style: italic;
+}
+
+.main-button-add {
+  font-family: "Freckle-Face";
+  margin-top: 5%;
+  width: 25%;
+  background-color: #d5c5c8;
+  color: #604d53;
+  font-size: 150%;
+  padding: 1%;
+}
+
+.main-button-add:hover {
+  background-color: #604d53;
+  color: #d5c5c8;
+}
+
+.main-button-add:active {
+  background-color: #413438;
+  color: #d5c5c8;
+}
+
+input,
+select {
+  font-family: "Arapey";
+  font-size: medium;
+  color: #604d53;
+  background-color: #d5c5c8;
+  border: 1px solid #604d53;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  width: 50%;
+}
+
+select {
+  width: 55%;
+}
+
+input[type="submit"] {
+  font-family: "Freckle-Face";
+  font-size: 125%;
+  width: 10%;
+  color: #d5c5c8;
+  background-color: #604d53;
+}
+
+input:hover[type="submit"] {
+  background-color: #d5c5c8;
+  color: #604d53;
+}
+
+input:active[type="submit"] {
+  background-color: #a3989a;
+  color: #604d53;
+}
+
+.button-delete {
+  font-family: "Freckle-Face";
+  font-size: 125%;
+  width: 10%;
+  color: #d5c5c8;
+  background-color: #604d53;
+  border: 1px solid #604d53;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.button-delete:hover {
+  background-color: #d5c5c8;
+  color: #604d53;
+}
+
+.button-delete:active {
+  background-color: #a3989a;
+  color: #604d53;
+}
+
+.unchangable-display {
+  padding-left: 6px;
+  font-weight: bold;
+  padding: 5px;
+  margin: 5px;
+}
+
+.td-left {
+  font-weight: bold;
+  font-size: 125%;
+}

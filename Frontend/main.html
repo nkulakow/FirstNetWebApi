@@ -2,22 +2,23 @@
 <html>
   <head>
     <title>Character List</title>
-    <style>
-      #button-list {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Arapey|Freckle-Face"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <h1>Character List</h1>
-    <div id="button-list"></div>
+    <div id="button-list" class="main-button-list"></div>
 
     <div>
-      <button onclick="location.href='addnew.html'">Add New Character</button>
+      <button onclick="location.href='addnew.html'" class="main-button-add">
+        Add New Character
+      </button>
     </div>
     <script>
+      document.title = "Character List";
       // Function to fetch character data and populate the list
       console.log("Starting fetch...");
       function fetchCharacterList() {
@@ -30,8 +31,17 @@
             if (data.success) {
               data.data.forEach((character) => {
                 var buttonItem = document.createElement("button");
-                buttonItem.textContent =
-                  character.name + " - " + character.class;
+                buttonItem.className = "main-button-character";
+                var nameElement = document.createElement("span");
+                nameElement.textContent = character.name;
+                nameElement.classList.add("main-button-character-top");
+                var classElement = document.createElement("span");
+                classElement.textContent = character.class;
+                classElement.classList.add("main-button-character-bottom");
+                buttonItem.appendChild(nameElement);
+                buttonItem.appendChild(document.createElement("br"));
+                buttonItem.appendChild(classElement);
+
                 buttonItem.addEventListener("click", function () {
                   console.log("Button clicked: " + this.textContent);
                   window.location.href = "getsingle.html?id=" + character.id;

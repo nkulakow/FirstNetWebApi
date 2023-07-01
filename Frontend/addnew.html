@@ -4,9 +4,14 @@
 <html>
   <head>
     <title>Add new Character</title>
-    <style></style>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Arapey|Freckle-Face"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <h1>Create new Character</h1>
     <form
       method="PUT"
       action="http://localhost:5266/api/Character/UpdateCharacter"
@@ -16,33 +21,33 @@
       <input id="class-input" type="hidden" name="class" />
       <table>
         <tr>
-          <td>Name</td>
+          <td class="td-left">Name</td>
           <td><input id="name" name="name" type="TEXT" /></td>
         </tr>
         <tr>
-          <td>Class</td>
+          <td class="td-left">Class</td>
           <td>
             <select id="class" name="class"></select>
           </td>
         </tr>
         <tr>
-          <td>HitPoints</td>
+          <td class="td-left">HitPoints</td>
           <td>
             <input id="hitpoints" name="hitPoints" type="NUMBER" value="0" />
           </td>
         </tr>
         <tr>
-          <td>Strength</td>
+          <td class="td-left">Strength</td>
           <td>
             <input id="strength" name="strenght" type="NUMBER" value="0" />
           </td>
         </tr>
         <tr>
-          <td>Defense</td>
+          <td class="td-left">Defense</td>
           <td><input id="defense" name="defense" type="NUMBER" value="0" /></td>
         </tr>
         <tr>
-          <td>Intelligence</td>
+          <td class="td-left">Intelligence</td>
           <td>
             <input
               id="intelligence"
