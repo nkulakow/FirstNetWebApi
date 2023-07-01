@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Character List</title>
     <style>
-       #button-list {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
+      #button-list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Character List</h1>
     <div id="button-list"></div>
 
-
+    <div>
+      <button onclick="location.href='addnew.html'">Add New Character</button>
+    </div>
     <script>
-        // Function to fetch character data and populate the list
-        console.log("Starting fetch...");
-        function fetchCharacterList() {
-            fetch('http://localhost:5266/api/Character')
-                .then(response => response.json())
-                .then(data => {
-                    const buttonList = document.getElementById('button-list');
-                    buttonList.innerHTML = ''; 
+      // Function to fetch character data and populate the list
+      console.log("Starting fetch...");
+      function fetchCharacterList() {
+        fetch("http://localhost:5266/api/Character")
+          .then((response) => response.json())
+          .then((data) => {
+            const buttonList = document.getElementById("button-list");
+            buttonList.innerHTML = "";
 
-                    if (data.success) {
-                        data.data.forEach(character => {
-                            var buttonItem = document.createElement('button');
-                            buttonItem.textContent = character.name + ' - ' + character.class;
-                            buttonItem.addEventListener('click', function() {
-                                console.log('Button clicked: ' + this.textContent);
-                                window.location.href = 'getsingle.html?id=' + character.id;
-                            });
-                            buttonList.appendChild(buttonItem);
-                        });
-                    } else {
-                        console.error(data.message);
-                    }
-                })
-                .catch(error => console.error(error));
-        }
+            if (data.success) {
+              data.data.forEach((character) => {
+                var buttonItem = document.createElement("button");
+                buttonItem.textContent =
+                  character.name + " - " + character.class;
+                buttonItem.addEventListener("click", function () {
+                  console.log("Button clicked: " + this.textContent);
+                  window.location.href = "getsingle.html?id=" + character.id;
+                });
+                buttonList.appendChild(buttonItem);
+              });
+            } else {
+              console.error(data.message);
+            }
+          })
+          .catch((error) => console.error(error));
+      }
 
-        fetchCharacterList();
-        console.log("Fetch complete.");
-        
+      fetchCharacterList();
+      console.log("Fetch complete.");
     </script>
-</body>
+  </body>
 </html>

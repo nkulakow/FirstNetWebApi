@@ -16,17 +16,36 @@ namespace FirstNet.Services.CharacterService
         public async Task<ServiceResponse<List<GetCharacterDto>>> AddCharacter(AddCharacterDto newCharacter)
         {
             var ServiceResponse = new ServiceResponse<List<GetCharacterDto>>();
-            var dbCharacters = await _context.Characters.ToListAsync();
-            var character = this._mapper.Map<Character>(newCharacter);
-            if (dbCharacters.Count > 0)
-                character.Id = dbCharacters.Max(c => c.Id) + 1;
-            else
-                character.Id = 1; ;
-            _context.Characters.Add(character);
-            _context.SaveChanges();
-            dbCharacters = await _context.Characters.ToListAsync();
-            ServiceResponse.Data = dbCharacters.Select(c => this._mapper.Map<GetCharacterDto>(c)).ToList();
-            return ServiceResponse;
+            try
+            {
+                var dbCharacters = await _context.Characters.ToListAsync();
+                var character = this._mapper.Map<Character>(newCharacter);
+                if (dbCharacters.Count > 0)
+                    character.Id = dbCharacters.Max(c => c.Id) + 1;
+                else
+                    character.Id = 1;
+                character.Name = Character.setCharacterName(character.Name, character.Id);
+                _context.Characters.Add(character);
+                _context.SaveChanges();
+                dbCharacters = await _context.Characters.ToListAsync();
+                ServiceResponse.Data = dbCharacters.Select(c => this._mapper.Map<GetCharacterDto>(c)).ToList();
+                return ServiceResponse;
+            }
+            catch (Exception ex)
+            {
+                if (new[] { newCharacter.Intelligence, newCharacter.HitPoints, newCharacter.Strenght, newCharacter.Defense }.Any(x => x < 0))
+                {
+                    ServiceResponse.Success = false;
+                    ServiceResponse.Message = "Character stats cannot be negative";
+                    return ServiceResponse;
+                }
+                else
+                {
+                    ServiceResponse.Success = false;
+                    ServiceResponse.Message = ex.Message;
+                    return ServiceResponse;
+                }
+            }
         }
 
         public async Task<ServiceResponse<List<GetCharacterDto>>> GetAllCharacters()
@@ -64,7 +83,7 @@ namespace FirstNet.Services.CharacterService
                 {
                     throw new Exception($"No character with given id = '{updatedCharacter.Id}'");
                 }
-                character.Name = updatedCharacter.Name;
+                character.Name = Character.setCharacterName(updatedCharacter.Name, updatedCharacter.Id);
                 character.Class = updatedCharacter.Class;
                 character.Defense = updatedCharacter.Defense;
                 character.HitPoints = updatedCharacter.HitPoints;
@@ -80,6 +99,7 @@ namespace FirstNet.Services.CharacterService
             {
                 ServiceResponse.Success = false;
                 ServiceResponse.Message = ex.Message;
+                return ServiceResponse;
             }
             return ServiceResponse;
         }
@@ -107,5 +127,6 @@ namespace FirstNet.Services.CharacterService
             }
             return ServiceResponse;
         }
+
     }
 }

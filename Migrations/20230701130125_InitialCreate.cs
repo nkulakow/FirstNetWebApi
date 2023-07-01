@@ -10,6 +10,7 @@ namespace FirstNet.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            Down(migrationBuilder);
             migrationBuilder.CreateTable(
                 name: "Characters",
                 columns: table => new
@@ -17,10 +18,10 @@ namespace FirstNet.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HitPoints = table.Column<int>(type: "int", nullable: false),
-                    Strenght = table.Column<int>(type: "int", nullable: false),
-                    Defense = table.Column<int>(type: "int", nullable: false),
-                    Intelligence = table.Column<int>(type: "int", nullable: false),
+                    HitPoints = table.Column<long>(type: "bigint", nullable: false),
+                    Strenght = table.Column<long>(type: "bigint", nullable: false),
+                    Defense = table.Column<long>(type: "bigint", nullable: false),
+                    Intelligence = table.Column<long>(type: "bigint", nullable: false),
                     Class = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

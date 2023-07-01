@@ -32,21 +32,21 @@ namespace FirstNet.Migrations
                     b.Property<int>("Class")
                         .HasColumnType("int");
 
-                    b.Property<int>("Defense")
-                        .HasColumnType("int");
+                    b.Property<long>("Defense")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("HitPoints")
-                        .HasColumnType("int");
+                    b.Property<long>("HitPoints")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("Intelligence")
-                        .HasColumnType("int");
+                    b.Property<long>("Intelligence")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Strenght")
-                        .HasColumnType("int");
+                    b.Property<long>("Strenght")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

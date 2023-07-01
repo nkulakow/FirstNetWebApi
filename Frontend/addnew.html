@@ -1,0 +1,111 @@
+<!-- This is the html page for adding a new character to the database. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add new Character</title>
+    <style></style>
+  </head>
+  <body>
+    <form
+      method="PUT"
+      action="http://localhost:5266/api/Character/UpdateCharacter"
+    >
+      <input id="id-input" type="hidden" name="id" />
+      <input id="name-input" type="hidden" name="name" />
+      <input id="class-input" type="hidden" name="class" />
+      <table>
+        <tr>
+          <td>Name</td>
+          <td><input id="name" name="name" type="TEXT" /></td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>
+            <select id="class" name="class"></select>
+          </td>
+        </tr>
+        <tr>
+          <td>HitPoints</td>
+          <td>
+            <input id="hitpoints" name="hitPoints" type="NUMBER" value="0" />
+          </td>
+        </tr>
+        <tr>
+          <td>Strength</td>
+          <td>
+            <input id="strength" name="strenght" type="NUMBER" value="0" />
+          </td>
+        </tr>
+        <tr>
+          <td>Defense</td>
+          <td><input id="defense" name="defense" type="NUMBER" value="0" /></td>
+        </tr>
+        <tr>
+          <td>Intelligence</td>
+          <td>
+            <input
+              id="intelligence"
+              name="intelligence"
+              type="NUMBER"
+              value="0"
+            />
+          </td>
+        </tr>
+      </table>
+      <p>
+        <input value="Add" type="SUBMIT" onclick="addCharacter(event)" />
+      </p>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      //Get the classes parameter from the URL
+      $.ajax({
+        url: "http://localhost:5266/api/Character/GetRpgClasses",
+        type: "GET",
+        success: function (response) {
+          var classSelect = document.getElementById("class");
+          response.forEach(function (className) {
+            var option = document.createElement("option");
+            option.value = className;
+            option.textContent = className;
+            classSelect.appendChild(option);
+          });
+        },
+        error: function (error) {
+          console.error(error);
+        },
+      });
+
+      // Function to add a new character
+      function addCharacter(event) {
+        event.preventDefault();
+        var formData = {
+          name: $("#name").val(),
+          class: $("#class").val(),
+          hitPoints: $("#hitpoints").val(),
+          strenght: $("#strength").val(),
+          defense: $("#defense").val(),
+          intelligence: $("#intelligence").val(),
+        };
+        $.ajax({
+          url: "http://localhost:5266/api/Character/AddCharacter",
+          type: "POST",
+          data: JSON.stringify(formData),
+          contentType: "application/json",
+          success: function (response) {
+            if (response.data) {
+              window.location.href = "main.html";
+            } else {
+              console.error(response);
+            }
+          },
+          error: function (error) {
+            alert(error.responseJSON.message);
+            console.error(error);
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

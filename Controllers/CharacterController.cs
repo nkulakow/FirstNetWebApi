@@ -62,5 +62,20 @@ namespace FirstNet.Controllers
             }
             return Ok(response);
         }
+
+        [HttpGet("GetRpgClasses")]
+        public ActionResult<IEnumerable<string>> GetRpgClasses()
+        {
+            var rpgClasses = Enum.GetNames(typeof(RpgClass));
+            return Ok(rpgClasses);
+        }
+
+        [HttpGet("GetConstants")]
+        public ActionResult<IEnumerable<string>> GetConstants()
+        {
+            var constants = ProgramConstants.getConstants();
+            return Ok(constants);
+        }
+
     }
 }
